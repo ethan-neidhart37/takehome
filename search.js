@@ -24,7 +24,7 @@ const search = async (tree) => {
         {
             type: 'number',
             name: 'query',
-            message: 'Enter a size:',
+            message: 'Enter a file size in bytes:',
             when: ({ searchType }) => searchType === properties.FILE_SIZE,
         },
         {
