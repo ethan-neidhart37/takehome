@@ -1,0 +1,23 @@
+{
+  "name": "takehome",
+  "version": "1.0.0",
+  "description": "PredictAP Take Home Project: indexing a base directory to use for searching for files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethan-neidhart37/takehome.git"
+  },
+	"type": "module",
+  "author": "Ethan Neidhart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ethan-neidhart37/takehome/issues"
+  },
+  "homepage": "https://github.com/ethan-neidhart37/takehome#readme",
+  "dependencies": {
+    "sbtree": "^3.1.0"
+  }
+}
