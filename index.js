@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import inquirer from 'inquirer';
 import fs from 'fs/promises';
 import path from 'path';
 import { SBTree } from 'sbtree';
@@ -24,6 +25,7 @@ const main = async () => {
 	}
 
 	await search();
+	process.exit(0);
 };
 
 // Recursively searches dir and adds all files found to tree
@@ -56,22 +58,34 @@ const indexDir = async (dirPath) => {
 	}
 };
 
-// TODO: Implement search
+// Prompts user for search terms, then grabs data from the tree
 const search = async () => {
-	log(tree.toJSON());
+	const { searchType } = await inquirer.prompt([
+		{
+			type: 'list',
+			name: 'searchType',
+			message: 'Lookup files by:',
+			choices: [
+				{ name: 'Name', value: 'fileName' },
+				{ name: 'Size', value: 'size' },
+				{ name: 'Content Type', value: 'contentType' },
+			],
+		}
+	]);
 
-	const sample = await tree.findDocuments({ fileName: 'sample' });
-	log(sample);
-	const forest = await tree.findDocuments({ fileName: 'random-forest' });
-	log(forest);
-	const rgrssn = await tree.findDocuments({ fileName: 'linear-regression-plot' });
-	log(rgrssn);
-	const user1 = await tree.findDocuments({ fileName: 'user1' });
-	log(user1);
-	const user2 = await tree.findDocuments({ fileName: 'user2' });
-	log(user2);
+	const { query } = await inquirer.prompt([
+		{
+			type: 'input',
+			name: 'query',
+			message: 'Enter your search term:'
+		}
+	]);
 
-	process.exit(0);
+	const results = await tree.findDocuments({ [searchType]: query });
+
+	for (const { location, fileName, contentType, fileSize } of results) {
+		console.log(`File: ${path.join(location, fileName + contentType)} \t Size: ${fileSize}B`);
+	}
 };
 
 tree.on('ready', main);
