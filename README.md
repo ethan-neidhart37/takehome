@@ -38,5 +38,5 @@ npm i
   * When no value is provided and no index file exists, uses `test_data` by default.
   * When no value is provided but an index file does exist, the index file is instead loaded to use for searching.
   * When any value is provided, a new index file is always created.
-* `--ignoreIndex, -i`: Ensures a new index file is always created.
+* `--ignoreIndex`, `-i`: Ensures a new index file is always created.
   * default: `false`
