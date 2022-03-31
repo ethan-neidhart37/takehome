@@ -46,7 +46,7 @@ if (indexExists) {
 		console.log('Index loaded.');
 	}
 } else {
-	tree = new SBTree({ order: 3, exclude: ['location'] });
+	tree = new SBTree({ order: 100, exclude: ['location'] });
 }
 
 // Populate tree and save index file if it needs to be written
